@@ -42,7 +42,7 @@ async function checkLogin(email, password) {
 }
 
 async function findUser(email) {
-	const foundUser = await User.findOne({ email: email })
+	const foundUser = await User.findOne({ email: email }).select("-password")
 
 	if (!foundUser) return false
 

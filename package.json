@@ -16,5 +16,8 @@
 	"bugs": {
 		"url": "https://github.com/kazuki-sep27/Mini-Blog/issues"
 	},
-	"homepage": "https://github.com/kazuki-sep27/Mini-Blog#readme"
+	"homepage": "https://github.com/kazuki-sep27/Mini-Blog#readme",
+	"dependencies": {
+		"joi-objectid": "^4.0.2"
+	}
 }

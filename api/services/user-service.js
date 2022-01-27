@@ -5,10 +5,12 @@ const { cryptPassword, comparePassword } = require('../helpers/encryption')
 
 async function isDuplicateUser(email) {
 	const foundUser = await findUser(email)
+
+	console.log(foundUser)
+
 	if (foundUser) {
 		return true
 	} else {
-		console.log(foundUser)
 		return false
 	}
 }
@@ -28,7 +30,7 @@ async function doSignUp(email, password) {
 }
 
 async function checkLogin(email, password) {
-	const foundUser = await findUser(email)
+	const foundUser = await findPassword(email)
 
 	if (!foundUser) return false
 
@@ -39,6 +41,14 @@ async function checkLogin(email, password) {
 	}
 
 	return foundUser.email
+}
+
+async function findPassword(email) {
+	const foundUser = await User.findOne({ email: email })
+
+	if (!foundUser) return false
+
+	return foundUser
 }
 
 async function findUser(email) {

@@ -16,5 +16,10 @@
 	"bugs": {
 		"url": "https://github.com/kazuki-sep27/Mini-Blog/issues"
 	},
-	"homepage": "https://github.com/kazuki-sep27/Mini-Blog#readme"
+	"homepage": "https://github.com/kazuki-sep27/Mini-Blog#readme",
+	"dependencies": {
+		"@fortawesome/fontawesome-svg-core": "^1.2.36",
+		"@fortawesome/free-solid-svg-icons": "^5.15.4",
+		"@fortawesome/react-fontawesome": "github:fortawesome/react-fontawesome"
+	}
 }

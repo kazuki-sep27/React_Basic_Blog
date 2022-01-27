@@ -1,15 +1,16 @@
 import React, { useContext } from "react";
+import { useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 
-
+import Center from '../Helper/Center';
 import AuthContext from '../../Store/auth-context';
 
 const axios = require('axios');
 const apiURL = process.env.REACT_APP_API_URL
 
 const LoginForm = () => {
-
     const authCtx = useContext(AuthContext)
+    const navigate = useNavigate();
 
     const { register, handleSubmit, setError, formState: { errors } } = useForm();
     const onSubmit = async (data) => {
@@ -20,7 +21,9 @@ const LoginForm = () => {
         })
 
         if (response.data.code === 200) {
-            authCtx.login(response.data.token)
+            let jwt = response.data.token
+            localStorage.setItem('token', jwt)
+            navigate('/admin/dashboard')
         } else {
             setError("email", {
                 type: "manual",
@@ -28,11 +31,11 @@ const LoginForm = () => {
             })
         }
 
-        console.log(response);
+        //console.log(response);
     }
 
     return (
-        <>
+        <Center>
             {!authCtx.isLoggedIn && (
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className='flex bg-gray-bg1'>
@@ -85,7 +88,7 @@ const LoginForm = () => {
                 </form >
             )
             }
-        </>
+        </Center>
     )
 }
 

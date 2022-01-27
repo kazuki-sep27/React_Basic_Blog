@@ -1,9 +1,9 @@
-import Header from '../Helper/Header';
+import Header from './Header';
 
 const Main = () => {
     return (
         <>
-            <Header pageName="Blog" />
+            <Header />
         </>
     )
 }

@@ -6,7 +6,7 @@ const Header = (props) => {
         <>
             <nav className="grid grid-cols-2 gap-4 items-center text-white bg-blue p-3">
                 <div>
-                    <span className=" text-xl tracking-tight">{props.pageName}</span>
+                    <span className=" text-xl tracking-tight">Blog</span>
                 </div>
             </nav>
         </>

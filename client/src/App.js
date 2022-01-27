@@ -1,15 +1,17 @@
-import * as React from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import React from "react";
+import { Routes, Route } from "react-router-dom";
 
 import Main from './Components/Blog/Main';
-import Admin from './Components/Admin/Admin';
+import LoginForm from "./Components/Admin/LoginForm";
+import Dashboard from "./Components/Admin/Dashboard";
 
 function App() {
     return (
         <Routes>
             <Route path="/" element={<Main />} />
             <Route path="main" element={<Main />} />
-            <Route path="admin" element={<Admin />} />
+            <Route path="admin/login" element={<LoginForm />} />
+            <Route path="admin/dashboard" element={<Dashboard />} />
             <Route
                 path="/*"
                 element={
@@ -18,7 +20,7 @@ function App() {
                     </main>
                 }
             />
-        </Routes >
+        </Routes>
     )
 }
 

@@ -1,16 +1,17 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import AuthContext from '../../Store/auth-context';
+import { useSelector, useDispatch } from 'react-redux';
+import { loginActions } from '../../Store/login';
 
 const Header = (props) => {
-    const authCtx = useContext(AuthContext)
     const navigate = useNavigate();
 
-    console.log(authCtx.token)
+    const dispatch = useDispatch();
+    const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
 
     const logoutHandler = () => {
-        localStorage.removeItem('token')
+        dispatch(loginActions.logout())
         navigate('/admin/login')
     };
 
@@ -20,13 +21,15 @@ const Header = (props) => {
                 <div>
                     <span className=" text-xl tracking-tight">Admin</span>
                 </div>
-                <div className='float-right'>
-                    <button
-                        className="bg-white text-sm float-right hover:bg-blue text-blue hover:text-white py-2 px-4 border border-blue hover:border-white rounded"
-                        onClick={logoutHandler}>
-                        Logout
-                    </button>
-                </div>
+                {isLoggedIn && (
+                    <div className='float-right'>
+                        <button
+                            className="bg-white text-sm float-right hover:bg-blue text-blue hover:text-white py-2 px-4 border border-blue hover:border-white rounded"
+                            onClick={logoutHandler}>
+                            Logout
+                        </button>
+                    </div>
+                )}
             </nav>
         </>
     )

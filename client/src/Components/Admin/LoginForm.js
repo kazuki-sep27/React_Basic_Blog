@@ -1,16 +1,20 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 
+import { useSelector, useDispatch } from 'react-redux';
+import { loginActions } from '../../Store/login';
+
 import Center from '../Helper/Center';
-import AuthContext from '../../Store/auth-context';
 
 const axios = require('axios');
 const apiURL = process.env.REACT_APP_API_URL
 
 const LoginForm = () => {
-    const authCtx = useContext(AuthContext)
     const navigate = useNavigate();
+
+    const dispatch = useDispatch();
+    const isLoggedIn = useSelector((state) => state.login.isLoggedIn);
 
     const { register, handleSubmit, setError, formState: { errors } } = useForm();
     const onSubmit = async (data) => {
@@ -22,7 +26,8 @@ const LoginForm = () => {
 
         if (response.data.code === 200) {
             let jwt = response.data.token
-            localStorage.setItem('token', jwt)
+            dispatch(loginActions.login(jwt))
+
             navigate('/admin/dashboard')
         } else {
             setError("email", {
@@ -30,13 +35,11 @@ const LoginForm = () => {
                 message: response.data.message,
             })
         }
-
-        //console.log(response);
     }
 
     return (
         <Center>
-            {!authCtx.isLoggedIn && (
+            {!isLoggedIn && (
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className='flex bg-gray-bg1'>
                         <div className='w-full max-w-md m-auto bg-white rounded-lg border border-primaryBorder shadow-default py-10 px-16'>

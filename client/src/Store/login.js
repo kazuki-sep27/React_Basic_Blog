@@ -2,14 +2,14 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const localToken = localStorage.getItem('token')
 
-const loginInitialState = {
+const initialLoginState = {
     token: localToken,
     isLoggedIn: !!localToken
 }
 
 export const loginSlice = createSlice({
     name: 'login',
-    loginInitialState,
+    initialState: initialLoginState,
     reducers: {
         login: (state, action) => {
             let jwt = action.payload
